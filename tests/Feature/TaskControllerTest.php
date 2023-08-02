@@ -76,7 +76,8 @@ class TaskControllerTest extends TestCase
         $response = $this->getJson('/api/tasks');
 
         $response->assertStatus(Response::HTTP_OK)
-            ->assertJsonCount(5);
+            ->assertJsonCount(5, 'data'); // Assuming that the tasks are returned in a 'data' key of the JSON response.
+
     }
 
     // Test for retrieving tasks by status

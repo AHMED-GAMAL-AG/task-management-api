@@ -109,7 +109,7 @@ class TaskController extends Controller
      */
     public function tasksByDate($date)
     {
-        $tasks = Task::where('status', $date)->get();
+        $tasks = Task::where('due_date', $date)->get();
 
         if ($tasks->isEmpty()) {
             return response()->json(['message' => 'No tasks found with the specified date'], Response::HTTP_NOT_FOUND);
