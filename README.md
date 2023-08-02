@@ -39,5 +39,4 @@ You can test the API through the Postman desktop application:
 <li><code>npm install</code></li>
 <li><code>php artisan key:generate</code></li>
 <li><code>php artisan migrate --seed</code></li>
-<li><code>php artisan storage:link</code></li>
 </ul>
