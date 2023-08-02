@@ -24,6 +24,13 @@ Route::apiResource('tasks', TaskController::class);
 Route::get('tasks/status/{status}', [TaskController::class, 'tasksByStatus']);
 Route::get('tasks/due-date/{date}', [TaskController::class, 'tasksDueWithinRange']);
 
+
+Route::prefix('v1')->group(function () {
+    Route::apiResource('tasks', TaskController::class);
+    Route::get('tasks/status/{status}', [TaskController::class, 'tasksByStatus']);
+    Route::get('tasks/due-date/{date}', [TaskController::class, 'tasksDueWithinRange']);
+});
+
 // Route::post('tasks', [TaskController::class, 'store']);
 // Route::put('tasks/{task}', [TaskController::class, 'update']);
 // Route::delete('tasks/{task}', [TaskController::class, 'destroy']);
