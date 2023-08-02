@@ -9,11 +9,9 @@ https://github.com/AHMED-GAMAL-AG/task-management-api/assets/76778937/f453afa6-d
 
 # Screenshots: 
 
-![image](https://github.com/AHMED-GAMAL-AG/task-management-api/assets/76778937/95d77bdd-e761-4936-b92f-eac5259bf0bb)
-
 You can test the API through the Postman desktop application:
 
-![image](https://github.com/AHMED-GAMAL-AG/LARAVEL_RESTFUL_API/assets/76778937/2575f313-fc58-4772-b1d2-0f6f177a0266)
+![image](https://github.com/AHMED-GAMAL-AG/task-management-api/assets/76778937/95d77bdd-e761-4936-b92f-eac5259bf0bb)
 
 Endpoints:
 ● Create a new task
