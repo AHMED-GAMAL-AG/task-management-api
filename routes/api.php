@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('tasks', TaskController::class);
 
 Route::get('tasks/status/{status}', [TaskController::class, 'tasksByStatus']);
-Route::get('tasks/due-range', [TaskController::class, 'tasksDueWithinRange']);
+Route::get('tasks/due-date/{date}', [TaskController::class, 'tasksDueWithinRange']);
 
 // Route::post('tasks', [TaskController::class, 'store']);
 // Route::put('tasks/{task}', [TaskController::class, 'update']);

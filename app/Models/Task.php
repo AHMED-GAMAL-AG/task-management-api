@@ -15,4 +15,5 @@ class Task extends Model
         'status',
         'due_date',
     ];
+
 }

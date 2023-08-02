@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
 {
@@ -20,14 +22,20 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'status' => 'required|in:in progress,completed,pending',
-            'due_date' => 'required|date',
+            'status' => 'required|in:in progress,completed,pending', // in: This rule specifies a list of allowed values for the 'status' field.
+            'due_date' => 'required|date|after_or_equal:' . now()->format('Y-m-d'),
         ]);
 
-        return Task::create($validatedData);
+        // if validation fails
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], Response::HTTP_BAD_REQUEST);
+        }
+
+        $task = Task::create($request->all());
+        return response()->json($task, Response::HTTP_CREATED);
     }
 
     /**
@@ -43,15 +51,20 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'status' => 'required|in:in progress,completed,pending',
-            'due_date' => 'required|date',
+            'status' => 'required|in:in progress,completed,pending', // in: This rule specifies a list of allowed values for the 'status' field.
+            'due_date' => 'required|date|after_or_equal:' . now()->format('Y-m-d'),
         ]);
 
-        $task->update($validatedData);
-        return $task;
+        // if validation fails
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], Response::HTTP_BAD_REQUEST);
+        }
+
+        $task->update($request->all());
+        return response()->json($task, Response::HTTP_OK);
     }
 
     /**
@@ -74,13 +87,8 @@ class TaskController extends Controller
     /**
      * Retrieve tasks that are due within a specified date range.
      */
-    public function tasksDueWithinRange(Request $request)
+    public function tasksDueWithinRange($date)
     {
-        $validatedData = $request->validate([
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-        ]);
-
-        return Task::whereBetween('due_date', [$validatedData['start_date'], $validatedData['end_date']])->get();
+        return Task::where('due_date', $date)->get();
     }
 }
