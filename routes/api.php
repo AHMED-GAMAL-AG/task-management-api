@@ -22,13 +22,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('tasks', TaskController::class);
 
 Route::get('tasks/status/{status}', [TaskController::class, 'tasksByStatus']);
-Route::get('tasks/due-date/{date}', [TaskController::class, 'tasksDueWithinRange']);
+Route::get('tasks/due-date/{date}', [TaskController::class, 'tasksByDate']);
 
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('tasks', TaskController::class);
     Route::get('tasks/status/{status}', [TaskController::class, 'tasksByStatus']);
-    Route::get('tasks/due-date/{date}', [TaskController::class, 'tasksDueWithinRange']);
+    Route::get('tasks/due-date/{date}', [TaskController::class, 'tasksByDate']);
 });
 
 // Route::post('tasks', [TaskController::class, 'store']);
