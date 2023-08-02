@@ -95,14 +95,39 @@ class TaskController extends Controller
      */
     public function tasksByStatus($status)
     {
-        return Task::where('status', $status)->get();
+        $tasks = Task::where('status', $status)->get();
+
+        if ($tasks->isEmpty()) {
+            return response()->json(['message' => 'No tasks found with the specified status'], Response::HTTP_NOT_FOUND);
+        }
+
+        return response()->json($tasks, Response::HTTP_OK);
     }
 
     /**
      * Retrieve tasks that are due within a specified date range.
      */
-    public function tasksDueWithinRange($date)
+    public function tasksDueWithinRange(Request $request)
     {
-        return Task::where('due_date', $date)->get();
+        $validator = Validator::make($request->all(), [
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+
+        // if validation fails
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], Response::HTTP_BAD_REQUEST);
+        }
+
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $tasks = Task::whereBetween('due_date', [$startDate, $endDate])->get();
+
+        if ($tasks->isEmpty()) {
+            return response()->json(['message' => 'No tasks found within the specified date range'], Response::HTTP_NOT_FOUND);
+        }
+
+        return response()->json($tasks, Response::HTTP_OK);
     }
 }
