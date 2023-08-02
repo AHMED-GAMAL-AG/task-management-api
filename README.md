@@ -3,24 +3,24 @@ A restful API for a Task Management system built with the Laravel framework. It 
 
 You can find an installation guide below.
 
-# Live Demo:
+## Live Demo:
 
 https://github.com/AHMED-GAMAL-AG/task-management-api/assets/76778937/f453afa6-d5aa-428d-a77c-ec107bac556c
 
-# Screenshots: 
+## Screenshots: 
 
 You can test the API through the Postman desktop application:
 
 ![image](https://github.com/AHMED-GAMAL-AG/task-management-api/assets/76778937/95d77bdd-e761-4936-b92f-eac5259bf0bb)
 
-Endpoints:
-● Create a new task
-● Update an existing task
-● Delete a task
-● Retrieve a single task by ID
-● Retrieve a list of all tasks
-● Retrieve tasks by status (e.g., "in progress," "completed")
-● Retrieve tasks that are due within a specified date range
+## Endpoints:
+- Create a new task
+- Update an existing task
+- Delete a task
+- Retrieve a single task by ID
+- Retrieve a list of all tasks
+- Retrieve tasks by status (e.g., "in progress," "completed")
+- Retrieve tasks that are due within a specified date range
 
 ## Features
 - validation to ensure that required fields are provided and that due dates are in the future.
